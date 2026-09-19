@@ -31,6 +31,6 @@ public:
     std::string getReservationDate() const;
 
     // display reservation
-    void display() const
+    void display() const;
 };
 #endif
