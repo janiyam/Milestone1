@@ -1,3 +1,9 @@
+#ifndef RESERVATION_H
+#define RESERVATION_H
+
+#include <string>
+using namespace std;
+
 class Reservation
 {
 private:
@@ -8,13 +14,24 @@ private:
     string reservationDate;
 
 public:
+    // default constructor
+    Reservation();
+
     // constructor
-    Reservation(...);
+    Reservation(int reservationID,
+                int studentID,
+                string studentName,
+                string resourceID,
+                string reservationDate);
 
     // getters
-    int getReservationID();
-    int getStudentID();
-    string getStudentName();
-    string getResourceID();
-    string getReservationDate();
+    int getReservationID() const;
+    int getStudentID() const;
+    string getStudentName() const;
+    string getResourceID() const;
+    string getReservationDate() const;
+
+    // display reservation
+    void display() const
 };
+#endif
