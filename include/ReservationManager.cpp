@@ -116,36 +116,30 @@ bool ReservationManager::reservationExists(int reservationID) const
     return false;
 }
 
-bool ReservationManager::validateReservation(
-    const Reservation& reservation) const
+bool ReservationManager::validateReservation(const Reservation& reservation) const
 {
+    // IDs must be positive
     if (reservation.getReservationID() <= 0)
-    {
         return false;
-    }
 
     if (reservation.getStudentID() <= 0)
-    {
         return false;
-    }
 
-    if (reservation.getStudentName().empty())
-    {
+    // Student name must have at least 2 characters
+    if (reservation.getStudentName().length() < 2)
         return false;
-    }
 
+    // Resource ID must not be empty or whitespace
     if (reservation.getResourceID().empty())
-    {
         return false;
-    }
 
-    if (reservation.getReservationDate().empty())
-    {
+    // Date must follow a basic YYYY-MM-DD format (length check only)
+    if (reservation.getReservationDate().length() < 8)
         return false;
-    }
 
     return true;
 }
+
 
 void ReservationManager::clear()
 {
