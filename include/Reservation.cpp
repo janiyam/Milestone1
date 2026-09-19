@@ -50,31 +50,6 @@ string Reservation::getReservationDate() const
     return reservationDate;
 }
 
-void Reservation::setReservationID(int id)
-{
-    reservationID = id;
-}
-
-void Reservation::setStudentID(int id)
-{
-    studentID = id;
-}
-
-void Reservation::setStudentName(string name)
-{
-    studentName = name;
-}
-
-void Reservation::setResourceID(string id)
-{
-    resourceID = id;
-}
-
-void Reservation::setReservationDate(string date)
-{
-    reservationDate = date;
-}
-
 void Reservation::display() const
 {
     cout << "Reservation ID: " << reservationID << endl;
