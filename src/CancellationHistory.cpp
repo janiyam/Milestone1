@@ -17,7 +17,7 @@ CancellationHistory::~CancellationHistory()
   }
 }
 
-void CancellationHistory::push(Reservation& reservation)
+void CancellationHistory::push(const Reservation& reservation)
 {
   Node* newNode = new Node;
   newNode->data = reservation;
