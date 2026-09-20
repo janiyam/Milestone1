@@ -53,12 +53,12 @@ bool WaitingList::dequeue(int& studentID, string& studentName, string& resourceI
   return true;
 }
 
-bool Waitinglist::isEmpty() const
+bool WaitingList::isEmpty() const
 {
   return front == nullptr;
 }
 
-void Waitinglist::display() const
+void WaitingList::display() const
 {
   if (front == nullptr)
   {
