@@ -11,6 +11,8 @@ private:
     Reservation data;
     Node* next;
   };
+    Node* top;
+
 public:
   CancellationHistory();
 
