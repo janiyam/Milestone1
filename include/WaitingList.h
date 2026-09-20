@@ -21,8 +21,8 @@ class WaitingList
     WaitingList();
 
     void enqueue(int studentID,
-                 const std::string studentName,
-                 const std::string resourceID);
+                 const std::string& studentName,
+                 const std::string& resourceID);
     bool dequeue(int& studentID,
                  std::string& studentName,
                  std::string& resourceID);
