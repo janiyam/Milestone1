@@ -1,1 +1,5 @@
-
+R001|Study Room A|Library|10
+R002|Study Room B|Library|8
+R003|Computer Lab|Engineering Building|30
+R004|Meeting Room|Student Union|12
+R005|Conference Room|Business Building|20
