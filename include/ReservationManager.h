@@ -2,8 +2,6 @@
 #define RESERVATIONMANAGER_H
 
 #include "Reservation.h"
-#include "WaitingList.h"
-#include "CancellationHistory.h"
 
 class ReservationManager
 {
@@ -23,9 +21,6 @@ private:
 
     Node* head;
 
-    WaitingList waitingList;
-    CancellationHistory cancellationHistory;
-
 public:
 
     ReservationManager();
@@ -42,23 +37,10 @@ public:
 
     bool validateReservation(const Reservation& reservation) const;
 
-    void addToWaitingList(int studentID, 
-                          const std::string& studentName, 
-                          const std::string& resourceID);
-
-    void processWaitingList();
-
-    void displayWaitingList();
-
-    bool undoCancellation();
-
-    void displayCancellationHistory() const;
-
 private:
 
     void clear();
 
-    void insertReservation(const Reservation& reservation);
 };
 
 #endif
