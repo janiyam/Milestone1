@@ -1,20 +1,20 @@
-#include ".../include/WaitingList.h"
+#include "../include/WaitingList.h"
 
 #include <iostream>
 using namespace std;
 
-WaitingList::WaitingList();
+WaitingList::WaitingList()
 {
   front = nullptr;
   rear = nullptr;
 }
 
-void WaitingList::enqueue(int studentID, const string& studentName, const string& resourceID);
+void WaitingList::enqueue(int studentID, const string& studentName, const string& resourceID)
 {
-  Node* newNode = new Node
+  Node* newNode = new Node;
 
   newNode->studentID = studentID;
-  newNode->studentName = studentaname;
+  newNode->studentName = studentName;
   newNode->resourceID = resourceID;
   newNode->next = nullptr;
 
@@ -30,9 +30,9 @@ void WaitingList::enqueue(int studentID, const string& studentName, const string
   }
 }
 
-bool WaitingList::dequeue(int& studentID, string& studentName, string& resourceID);
+bool WaitingList::dequeue(int& studentID, string& studentName, string& resourceID)
 {
-  if (fornt == nullptr)
+  if (front == nullptr)
   {
     return false;
   }
@@ -62,7 +62,7 @@ void WaitingList::display() const
 {
   if (front == nullptr)
   {
-      cout << "Waisting list is empty." << endl;
+      cout << "Waiting list is empty." << endl;
       return;
   }
   Node* current = front;
