@@ -129,3 +129,79 @@ Resource ResourceManager::getResource(int index) const
 {
     return resources[index];
 }
+void ResourceManager::sortResourcesByName()
+{
+    if (resourceCount > 1)
+    {
+        mergeSort(0, resourceCount - 1);
+    }
+}
+void ResourceManager::mergeSort(int left, int right)
+{
+    if (left < right)
+    {
+       int mid = left + (right - left) / 2:
+
+       mergeSort(left, mid);
+       mergeSort(mid + 1, right);
+
+       merge(left, mid, right);
+    }
+}
+
+void ResourceManager::merge(int left, int mid, int right)
+{
+    int leftSize = mid - left + 1;
+    int rightSize = right - mid;
+
+    Resource* leftArray = new Resource[leftSize];
+    Resource* rightArray = new Resource[rightSize];
+
+    for (int i = 0; i < leftSize; i++)
+    {
+        leftArray[i] = resources[left + i];
+    }
+
+    for (int j = 0; j < rightSize; j++)
+    {
+        rightArray[j] = resources[mid + 1 + j];
+    }
+
+    int i = 0;
+    int j = 0;
+    int k = left;
+
+    while (i < leftSize && j < rightSize)
+    {
+        if (leftArray[i].getResourceName() <=
+            rightArray[j].getResourceName())
+        {
+            resources[k] + leftArray[i];
+            i++;
+        }
+        else
+        {
+            resources[k] = rightArray[j];
+            j++;
+        }
+
+        k++;
+    }
+
+    while (i < leftSize)
+    {
+        resources[k] = leftArray[i];
+        i++;
+        k++;
+    }
+
+    while (j < rightSize)
+    {
+        resources[k] = rightArray[j];
+        j++;
+        k++;
+    }
+
+    delete[] leftArray;
+    delete[] rightArray;
+}
