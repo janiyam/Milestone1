@@ -34,6 +34,9 @@ private:
     Resource resources[MAX_RESOURCES];
     int resourceCount;
 
+    void mergeSort(int left, int right);
+    void merge(int left, int mid, int right);
+
 public:
     ResourceManager();
 
@@ -43,6 +46,8 @@ public:
 
     int getResourceCount() const;
     Resource getResource(int index) const;
+
+    void sortResourcesByName();
 };
 
 #endif
