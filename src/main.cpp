@@ -2,6 +2,7 @@
 #include "../include/Reservation.h"
 #include "../include/WaitingList.h"
 #include "../include/CancellationHistory.h"
+#include "../include/Resource.h"
 
 #include <iostream>
 #include <string>
@@ -9,11 +10,55 @@
 
 using namespace std;
 
+void addStudentToWaitingList(WaitingList& waitingList)
+{
+    int studentID;
+    string studentName;
+    string resourceID;
+
+    cout << "\n=== Add Student to Waiting List ===\n";
+
+    cout << "Student ID: ";
+    if (!(cin >> studentID))
+    {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "Invalid Student ID.\n";
+        return;
+    }
+
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    cout << "Student Name: ";
+    getline(cin, studentName);
+
+    cout << "Resource ID: ";
+    getline(cin, resourceID);
+
+    if (studentID <= 0 ||
+        studentName.empty() ||
+        resourceID.empty())
+    {
+        cout << "Invalid student information.\n";
+        return;
+    }
+
+    waitingList.enqueue(studentID, studentName, resourceID);
+
+    cout << "Student added to waiting list successfully.\n";
+}
+
 int main()
 {
   ReservationManager manager;
   WaitingList waitingList;
   CancellationHistory cancellationHistory;
+  ResourceManager resourceManager;
+
+  if (!resourceManager.loadResources("data/resources.txt"))
+  {
+      cout << "Error loading resources.\n";
+  }
 
   int choice;
 
@@ -28,8 +73,9 @@ int main()
     cout << "6. Remove Student from Waiting List\n";
     cout << "7. View Waiting List\n";
     cout << "8. View Cancellation History\n";
-    cout << "9. Exit\n";
-    cout << "Enter Choice: ";
+    cout << "9. View Resources Sorted by Name\n";
+    cout << "10. Exit\n";
+    cout << "Enter your choice: ";
 
     cin >> choice;
     if (cin.fail())
@@ -136,12 +182,18 @@ int main()
               cancellationHistory.display();
               break;
         case 9:
-              cout << "Exit...\n";
+              resourceManager.sortResourcesByName();
+              cout << "\n=== Resources Sorted Alphabetically ===\n";
+              resourceManager.displayResources();
               break;
+
+       case 10:
+            cout << "Exit...\n";
+            break;
         default:
               cout << "Invalid choice.\n";
     }
-  } while (choice != 9);
+  } while (choice != 10);
   
   return 0;
 }
