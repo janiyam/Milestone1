@@ -3,49 +3,54 @@
 
 #include <string>
 
-class Resource
-{
+class Resource {
 private:
     std::string resourceID;
     std::string resourceName;
-    std::string location;
-    int capacity;
+    std::string resourceType;
+    std::string availabilityStatus;
 
 public:
     Resource();
 
-    Resource(std::string resourceID,
-             std::string resourceName,
-             std::string location,
-             int capacity);
+    Resource(const std::string& id,
+             const std::string& name,
+             const std::string& type,
+             const std::string& status);
 
     std::string getResourceID() const;
     std::string getResourceName() const;
-    std::string getLocation() const;
-    int getCapacity() const;
+    std::string getResourceType() const;
+    std::string getAvailabilityStatus() const;
 
+    void setAvailabilityStatus(const std::string& status);
     void display() const;
 };
 
-class ResourceManager
-{
+class ResourceManager {
 private:
     static const int MAX_RESOURCES = 100;
+
     Resource resources[MAX_RESOURCES];
     int resourceCount;
 
     void mergeSort(int left, int right);
-    void merge(int left, int mid, int right);
+    void merge(int left, int middle, int right);
 
 public:
     ResourceManager();
 
-    bool loadResources(std::string fileName);
+    bool loadResources(const std::string& fileName);
     void displayResources() const;
-    bool resourceExists(std::string resourceID) const;
+
+    bool resourceExists(const std::string& resourceID) const;
+    int findResourceIndex(const std::string& resourceID) const;
 
     int getResourceCount() const;
     Resource getResource(int index) const;
+
+    bool setResourceStatus(const std::string& resourceID,
+                           const std::string& status);
 
     void sortResourcesByName();
 };
