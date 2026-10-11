@@ -1,4 +1,4 @@
-#include "../include/ReservationManger.h"
+#include "../include/ReservationManager.h"
 #include "../include/Reservation.h"
 #include "../include/WaitingList.h"
 #include "../include/CancellationHistory.h"
