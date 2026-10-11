@@ -99,7 +99,7 @@ int main()
         }
 
         case 3: 
-            manager.displayReservation();
+            manager.displayReservations();
             break;
 
         case 4:
