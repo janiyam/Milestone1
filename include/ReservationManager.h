@@ -2,45 +2,59 @@
 #define RESERVATIONMANAGER_H
 
 #include "Reservation.h"
+#include <string>
 
-class ReservationManager
-{
+class ReservationManager {
 private:
-
-    struct Node
-    {
+    struct Node {
         Reservation reservation;
         Node* next;
 
-        Node(const Reservation& res)
-        {
-            reservation = res;
-            next = nullptr;
+        Node(const Reservation& value)
+            : reservation(value), next(nullptr) {
         }
     };
 
     Node* head;
 
+    void clear();
+
 public:
-
     ReservationManager();
-
     ~ReservationManager();
+
+    // Prevent copying the linked list accidentally.
+    ReservationManager(const ReservationManager&) = delete;
+    ReservationManager& operator=(
+        const ReservationManager&) = delete;
 
     bool createReservation(const Reservation& reservation);
 
     bool cancelReservation(int reservationID);
+    bool cancelReservation(
+        int reservationID,
+        Reservation& canceled);
+
+    bool restoreReservation(const Reservation& reservation);
 
     void displayReservations() const;
 
     bool reservationExists(int reservationID) const;
 
-    bool validateReservation(const Reservation& reservation) const;
+    bool validateReservation(
+        const Reservation& reservation) const;
 
-private:
+    bool findReservation(
+        int reservationID,
+        Reservation& result) const;
 
-    void clear();
+    // Functions used by reports.
+    int getTotalActiveReservations() const;
 
+    int countReservationsForResource(
+        const std::string& resourceID) const;
+
+    int countReservationsForStudent(int studentID) const;
 };
 
 #endif
