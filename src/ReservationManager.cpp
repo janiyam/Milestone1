@@ -25,6 +25,18 @@ bool ReservationManager::createReservation(const Reservation& reservation)
         return false;
     }
 
+    Node* current = head;
+    while (current != nullptr)
+    {
+        if (current->reservation.getResourceID() == reservation.getResourceID() &&
+            current->reservation.getReservationDate() == reservation.getReservationDate())
+        {
+            return false;
+        }
+
+        current = current->next;
+    }
+
     Node* newNode = new Node(reservation);
 
     if (head == nullptr)
@@ -33,26 +45,21 @@ bool ReservationManager::createReservation(const Reservation& reservation)
     }
     else
     {
-        Node* current = head;
+        Node* tail = head;
 
-        while (current->next != nullptr)
+        while (tail->next != nullptr)
         {
-            current = current->next;
+            tail = tail->next;
         }
 
-        current->next = newNode;
+        tail->next = newNode;
     }
 
     return true;
 }
 
-bool ReservationManager::cancelReservation(int reservationID)
+bool ReservationManager::cancelReservation(int reservationID, CancellationHistory& history)
 {
-    if (head == nullptr)
-    {
-        return false;
-    }
-
     Node* current = head;
     Node* previous = nullptr;
 
@@ -60,6 +67,8 @@ bool ReservationManager::cancelReservation(int reservationID)
     {
         if (current->reservation.getReservationID() == reservationID)
         {
+            history.push(current->reservation);
+
             if (previous == nullptr)
             {
                 head = current->next;
@@ -153,4 +162,35 @@ void ReservationManager::clear()
     }
 
     head = nullptr;
+}
+
+int ReservationManager::getReservationCount() const
+{
+    int count = 0;
+    Node* current = head;
+
+    while (current != nullptr)
+    {
+        count++;
+        current = current->next;
+    }
+
+    return count;
+}
+
+int ReservationManager::countForResource(const std::string& resourceID) const
+{
+    int count = 0;
+    Node* current = head;
+
+    while (current != nullptr)
+    {
+        if (current->reservation.getResourceID() == resourceID)
+        {
+            count++;
+        }
+        current = current->next;
+    }
+
+    return count;
 }

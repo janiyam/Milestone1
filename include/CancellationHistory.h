@@ -18,6 +18,9 @@ public:
 
   ~CancellationHistory();
 
+  CancellationHistory(const CancellationHistory&) = delete;
+  CancellationHistory& operator=(const CancellationHistory&) = delete;
+
   void push(const Reservation& reservation);
 
   bool pop(Reservation& reservation);

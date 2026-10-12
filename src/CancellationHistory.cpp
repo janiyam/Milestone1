@@ -1,10 +1,10 @@
-#include ".../include/CancellationHistory.h"
+#include "../include/CancellationHistory.h"
 #include <iostream>
 using namespace std;
 
 CancellationHistory::CancellationHistory()
 {
-  top == nullptr;
+  top = nullptr;
 }
 
 CancellationHistory::~CancellationHistory()
@@ -20,6 +20,7 @@ CancellationHistory::~CancellationHistory()
 void CancellationHistory::push(const Reservation& reservation)
 {
   Node* newNode = new Node;
+  
   newNode->data = reservation;
   newNode->next = top;
   top = newNode;
@@ -39,12 +40,12 @@ bool CancellationHistory::pop(Reservation& reservation)
   return true;
 }
 
-bool CancellationHistory::isEmpty() const;
+bool CancellationHistory::isEmpty() const
 {
   return top == nullptr;
 }
 
-void CancellationHistory::display() const;
+void CancellationHistory::display() const
 {
   if (top == nullptr)
   {

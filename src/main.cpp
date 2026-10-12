@@ -9,6 +9,27 @@
 
 using namespace std;
 
+void addStudentToWaitingList(WaitingList& waitingList)
+{
+    int studentID;
+    string studentName;
+    string resourceID;
+
+    cout << "Student ID: ";
+    cin >> studentID;
+
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    cout << "Student Name: ";
+    getline(cin, studentName);
+
+    cout << "Resource ID: ";
+    getline(cin, resourceID);
+
+    waitingList.enqueue(studentID, studentName, resourceID);
+    cout << "Student added to waiting list.\n";
+}
+
 int main()
 {
   ReservationManager manager;
@@ -87,9 +108,9 @@ int main()
             cout << "Cancelled Reservation ID: ";
             cin >> reservationID;
 
-            if (manager.cancelReservation(reservationID))
+            if (manager.cancelReservation(reservationID, cancellationHistory))
             {
-                cout << "Reserved cancelled.\n";
+                cout << "Reservation cancelled.\n";
             }
             else
             {

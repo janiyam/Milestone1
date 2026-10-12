@@ -8,6 +8,17 @@ WaitingList::WaitingList()
   front = nullptr;
   rear = nullptr;
 }
+WaitingList::~WaitingList()
+{
+  while (front != nullptr)
+  {
+    Node* temp = front;
+    front = front->next;
+    delete temp;
+  }
+
+  rear = nullptr;
+}
 
 void WaitingList::enqueue(int studentID, const string& studentName, const string& resourceID)
 {
@@ -76,4 +87,22 @@ void WaitingList::display() const
 
       current = current->next;
   }
+}
+
+int WaitingList::countForResource(const string& resourceID) const
+{
+    int count = 0;
+    Node* current = front;
+
+    while (current != nullptr)
+    {
+        if (current->resourceID == resourceID)
+        {
+            count++;
+        }
+
+        current = current->next;
+    }
+
+    return count;
 }
