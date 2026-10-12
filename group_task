@@ -1,3 +1,3 @@
-cout >> " Michaela is responsible for reservation management and HEADERS. "
-cout >> " Janiya is responsible for resource management and README. "
-cout >> " Ruth is responsible for source code (linked and waiting list, cancellation history, complexity analysis?)
+cout >> " Michaela is responsible for reservation management, HEADERS, and the implementation of a Searching Algorithim."
+cout >> " Janiya is responsible for resource management, README, and the implementation of a Sorting ALgorithim."
+cout >> " Ruth is responsible for source code (linked and waiting list, cancellation history, complexity analysis?) and Reporting."
