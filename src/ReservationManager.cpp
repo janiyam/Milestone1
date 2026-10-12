@@ -62,6 +62,18 @@ bool ReservationManager::createReservation(
         return false;
     }
 
+    Node* current = head;
+    while (current != nullptr)
+    {
+        if (current->reservation.getResourceID() == reservation.getResourceID() &&
+            current->reservation.getReservationDate() == reservation.getReservationDate())
+        {
+            return false;
+        }
+
+        current = current->next;
+    }
+
     Node* newNode = new Node(reservation);
 
     if (head == nullptr) {
@@ -73,34 +85,66 @@ bool ReservationManager::createReservation(
             current = current->next;
         }
 
-        current->next = newNode;
+        tail->next = newNode;
     }
 
     return true;
 }
 
 bool ReservationManager::cancelReservation(
-    int reservationID) {
+    int reservationID,
+    CancellationHistory& history)
+{
+    Reservation canceled;
 
+    if (!cancelReservation(reservationID, canceled))
+    {
+        return false;
+    }
+
+    history.push(canceled);
+    return true;
+}
+
+bool ReservationManager::cancelReservation(int reservationID)
+{
     Reservation canceled;
     return cancelReservation(reservationID, canceled);
 }
 
 bool ReservationManager::cancelReservation(
     int reservationID,
-    Reservation& canceled) {
-
+    Reservation& canceled)
+{
     Node* current = head;
     Node* previous = nullptr;
 
-    while (current != nullptr) {
-        if (current->reservation.getReservationID()
-            == reservationID) {
-
-            // Save the reservation before deleting it.
+    while (current != nullptr)
+    {
+        if (current->reservation.getReservationID() == reservationID)
+        {
             canceled = current->reservation;
 
-            if (previous == nullptr) {
+            if (previous == nullptr)
+            {
+                head = current->next;
+            }
+            else
+            {
+                previous->next = current->next;
+            }
+
+            delete current;
+            return true;
+        }
+
+        previous = current;
+        current = current->next;
+    }
+
+    return false;
+}
+
                 head = current->next;
             } else {
                 previous->next = current->next;
@@ -237,4 +281,35 @@ void ReservationManager::clear() {
         delete head;
         head = nextNode;
     }
+}
+
+int ReservationManager::getReservationCount() const
+{
+    int count = 0;
+    Node* current = head;
+
+    while (current != nullptr)
+    {
+        count++;
+        current = current->next;
+    }
+
+    return count;
+}
+
+int ReservationManager::countForResource(const std::string& resourceID) const
+{
+    int count = 0;
+    Node* current = head;
+
+    while (current != nullptr)
+    {
+        if (current->reservation.getResourceID() == resourceID)
+        {
+            count++;
+        }
+        current = current->next;
+    }
+
+    return count;
 }

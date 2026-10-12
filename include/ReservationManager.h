@@ -30,6 +30,7 @@ public:
 
     bool createReservation(const Reservation& reservation);
 
+    bool cancelReservation(int reservationID, CancellationHistory& history);
     bool cancelReservation(int reservationID);
     bool cancelReservation(
         int reservationID,
@@ -38,6 +39,10 @@ public:
     bool restoreReservation(const Reservation& reservation);
 
     void displayReservations() const;
+
+    int getReservationCount() const;
+
+    int countForResource(const std::string& resourceID) const;
 
     bool reservationExists(int reservationID) const;
 

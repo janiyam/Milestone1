@@ -3,6 +3,7 @@
 #include "../include/WaitingList.h"
 #include "../include/CancellationHistory.h"
 #include "../include/Resource.h"
+#include "../include/ReportGenerator.h"
 
 #include <iostream>
 #include <string>
@@ -16,6 +17,7 @@ void addStudentToWaitingList(WaitingList& waitingList)
     string studentName;
     string resourceID;
 
+
     cout << "\n=== Add Student to Waiting List ===\n";
 
     cout << "Student ID: ";
@@ -27,6 +29,7 @@ void addStudentToWaitingList(WaitingList& waitingList)
         return;
     }
 
+
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
     cout << "Student Name: ";
@@ -34,6 +37,7 @@ void addStudentToWaitingList(WaitingList& waitingList)
 
     cout << "Resource ID: ";
     getline(cin, resourceID);
+
 
     if (studentID <= 0 ||
         studentName.empty() ||
@@ -46,6 +50,7 @@ void addStudentToWaitingList(WaitingList& waitingList)
     waitingList.enqueue(studentID, studentName, resourceID);
 
     cout << "Student added to waiting list successfully.\n";
+
 }
 
 int main()
@@ -54,6 +59,7 @@ int main()
   WaitingList waitingList;
   CancellationHistory cancellationHistory;
   ResourceManager resourceManager;
+  ReportGenerator reportGenerator;
 
   if (!resourceManager.loadResources("data/resources.txt"))
   {
@@ -74,7 +80,8 @@ int main()
     cout << "7. View Waiting List\n";
     cout << "8. View Cancellation History\n";
     cout << "9. View Resources Sorted by Name\n";
-    cout << "10. Exit\n";
+    cout << "10. View Report Generator\n";
+    cout << "11. Exit\n";
     cout << "Enter your choice: ";
 
     cin >> choice;
@@ -133,9 +140,9 @@ int main()
             cout << "Cancelled Reservation ID: ";
             cin >> reservationID;
 
-            if (manager.cancelReservation(reservationID))
+            if (manager.cancelReservation(reservationID, cancellationHistory))
             {
-                cout << "Reserved cancelled.\n";
+                cout << "Reservation cancelled.\n";
             }
             else
             {
@@ -186,8 +193,15 @@ int main()
               cout << "\n=== Resources Sorted Alphabetically ===\n";
               resourceManager.displayResources();
               break;
+        case 10:
+    reportGenerator.generateAllReports(
+        resourceManager,
+        manager,
+        waitingList
+    );
+    break;
 
-       case 10:
+       case 11:
             cout << "Exit...\n";
             break;
         default:
