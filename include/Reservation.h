@@ -3,8 +3,7 @@
 
 #include <string>
 
-class Reservation
-{
+class Reservation {
 private:
     int reservationID;
     int studentID;
@@ -13,24 +12,21 @@ private:
     std::string reservationDate;
 
 public:
-    // default constructor
     Reservation();
 
-    // constructor
     Reservation(int reservationID,
                 int studentID,
-                std::string studentName,
-                std::string resourceID,
-                std::string reservationDate);
+                const std::string& studentName,
+                const std::string& resourceID,
+                const std::string& reservationDate);
 
-    // getters
     int getReservationID() const;
     int getStudentID() const;
     std::string getStudentName() const;
     std::string getResourceID() const;
     std::string getReservationDate() const;
 
-    // display reservation
     void display() const;
 };
+
 #endif
