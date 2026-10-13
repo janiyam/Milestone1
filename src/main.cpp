@@ -205,7 +205,7 @@ int main()
         default:
               cout << "Invalid choice.\n";
     }
-  } while (choice != 10);
+  } while (choice != 11);
   
   return 0;
 }
