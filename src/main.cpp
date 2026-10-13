@@ -80,7 +80,7 @@ int main()
     cout << "7. View Waiting List\n";
     cout << "8. View Cancellation History\n";
     cout << "9. View Resources Sorted by Name\n";
-    cout << "10. View Report Generator\n";
+    cout << "10. Generate Reports\n";
     cout << "11. Exit\n";
     cout << "Enter your choice: ";
 
@@ -194,12 +194,10 @@ int main()
               resourceManager.displayResources();
               break;
         case 10:
-    reportGenerator.generateAllReports(
-        resourceManager,
-        manager,
-        waitingList
-    );
-    break;
+              reportGenerator.generateAllReports(resourceManager,
+              manager,
+              waitingList);
+              break;
 
        case 11:
             cout << "Exit...\n";
